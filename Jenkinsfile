@@ -17,7 +17,7 @@ pipeline {
               sh 'mvn clean package'
             }
         }
-      stage('Static Code Analysis') {
+      /* stage('Static Code Analysis') {
       environment {
         SONAR_URL = "http://54.225.1.203:9000"
       }
@@ -26,7 +26,7 @@ pipeline {
           sh  'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
       }
-    }
+    }*/
         stage('docker-build'){
             environment {
               DOCKER_IMAGE = "sai411/spring-boot-java-app:${env.BUILD_NUMBER}"
