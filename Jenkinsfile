@@ -52,7 +52,7 @@ pipeline {
               sed -i 's/replaceImageTag/"${env.BUILD_NUMBER}"/g' manifestfiles/deployment.yml
               git add manifestfiles/deployment.yml
               git commit -m "Updated deployment.yml with image version"
-              git push origin main
+              git push origin refs/heads/main
              '''
             }
             }
