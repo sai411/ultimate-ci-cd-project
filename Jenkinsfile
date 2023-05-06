@@ -1,0 +1,35 @@
+pipeline {
+    agent {
+        docker{
+            image 'abhishekf5/maven-abhishek-docker-agent:v1'
+            args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+        }
+    }
+
+    stages {
+        stage('git checkout') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('build'){
+            steps{
+              sh 'mvn clean package'
+            }
+        }
+        stage('docker-build'){
+            environment {
+              DOCKER_IMAGE = "sai411/spring-boot-java-app:${BUILD_NUMBER}"
+              REGISTRY_CREDENTIALS = credentials('docker-cred')
+      }
+            steps{
+             script{
+                sh 'docker build -t ${DOCKER_IMAGE} .'
+                def docker_image = docker.image("${DOCKER_IMAGE}")
+                docker.withRegistry('https://hub.docker.com/repositories/sai411', "docker-cred") 
+                docker_image.push()
+            }
+            }
+        }
+    }
+}
