@@ -36,7 +36,7 @@ pipeline {
                 script{
                 sh 'docker build -t ${DOCKER_IMAGE} .'
                 def docker_image = docker.image("${DOCKER_IMAGE}")
-                docker.withRegistry('https://hub.docker.com', "docker-cred") {
+                docker.withRegistry('https://registry.hub.docker.com', "docker-cred") {
                     docker_image.push()
                 }
             }
