@@ -30,7 +30,7 @@ pipeline {
         stage('docker-build'){
             environment {
               DOCKER_IMAGE = "sai411/spring-boot-java-app:${BUILD_NUMBER}"
-              //REGISTRY_CREDENTIALS = credentials('docker-cred')
+              REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
             steps{
                 script{
