@@ -42,5 +42,21 @@ pipeline {
             }
             }
         }
+    stage('update manifestfile'){
+        steps{
+             sh 'echo ${env.BUILD_NUMBER}'
+             withCredentials([gitUsernamePassword(credentialsId: '3d567b1b-b8d3-490d-95f2-1a10870cb340', gitToolName: 'Default')]) {
+             sh 
+             '''
+              git config user.email "saisatyanarayanagampa@gmail.com"
+              git config user.name "sai411"
+              sed -i 's/image: spring-boot-java-app:v1/image: spring-boot-java-app:${env.BUILD_NUMBER}/g' manifestfiles/deployment.yml
+              git add manifestfiles/deployment.yml
+              git commit -m "Updated deployment.yml with image version"
+              git push origin main
+             '''
+            }
+            }
+    }
     }
 }
