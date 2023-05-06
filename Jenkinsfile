@@ -30,7 +30,6 @@ pipeline {
         stage('docker-build'){
             environment {
               DOCKER_IMAGE = "sai411/spring-boot-java-app:${env.BUILD_NUMBER}"
-              // REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
             steps{
                 script{
@@ -44,7 +43,6 @@ pipeline {
         }
     stage('update manifestfile'){
         steps{
-             sh "echo ${env.BUILD_NUMBER}"
              withCredentials([gitUsernamePassword(credentialsId: '3d567b1b-b8d3-490d-95f2-1a10870cb340', gitToolName: 'Default')]) {
              sh '''
               git config user.email "saisatyanarayanagampa@gmail.com"
