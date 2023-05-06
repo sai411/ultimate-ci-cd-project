@@ -47,7 +47,8 @@ pipeline {
              sh '''
               git config user.email "saisatyanarayanagampa@gmail.com"
               git config user.name "sai411"
-              sed -i "s/replaceImageTag/${env.BUILD_NUMBER}/g" manifestfiles/deployment.yml
+              BUILD_NUMBER=${env.BUILD_NUMBER}
+              sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" manifestfiles/deployment.yml
               git add manifestfiles/deployment.yml
               git commit -m "Updated deployment.yml with image version"
               git push origin HEAD:main
