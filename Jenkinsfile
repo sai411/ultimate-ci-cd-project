@@ -17,17 +17,28 @@ pipeline {
               sh 'mvn clean package'
             }
         }
+      stage('Static Code Analysis') {
+      environment {
+        SONAR_URL = "http://:9000"
+      }
+      steps {
+          withCredentials([string(credentialsId: 'SONAR_AUTH_TOKEN', variable: 'SONAR_AUTH_TOKEN')]) {
+          sh  'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+        }
+      }
+    }
         stage('docker-build'){
             environment {
               DOCKER_IMAGE = "sai411/spring-boot-java-app:${BUILD_NUMBER}"
-              REGISTRY_CREDENTIALS = credentials('docker-cred')
+              //REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
             steps{
-             script{
+                script{
                 sh 'docker build -t ${DOCKER_IMAGE} .'
                 def docker_image = docker.image("${DOCKER_IMAGE}")
-                docker.withRegistry('https://hub.docker.com/repositories/sai411', "docker-cred") 
-                docker_image.push()
+                docker.withRegistry('https://hub.docker.com', "docker-cred") {
+                    docker_image.push()
+                }
             }
             }
         }
