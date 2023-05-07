@@ -45,14 +45,14 @@ pipeline {
             steps{
              sh "echo ${env.BUILD_NUMBER}"
              withCredentials([gitUsernamePassword(credentialsId: '3d567b1b-b8d3-490d-95f2-1a10870cb340', gitToolName: 'Default')]) {
-             sh '''
-              git config user.email "saisatyanarayanagampa@gmail.com"
-              git config user.name "sai411"
-              BUILD_NUMBER=${env.BUILD_NUMBER}
-              sed -i \"s/version: [0-9]\\+/version: ${BUILD_NUMBER}/\" "manifestfiles/config_map.yml"
-              git add manifestfiles/config_map.yml
-              git commit -m "Updated config_map.yml with image version"
-              git push origin main
+             sh '''#!/bin/bash -xe
+                  git config user.email "saisatyanarayanagampa@gmail.com"
+                  git config user.name "sai411"
+                  BUILD_NUMBER=${env.BUILD_NUMBER}
+                  sed -i \"s/version: [0-9]\\+/version: ${BUILD_NUMBER}/\" "manifestfiles/config_map.yml"
+                  git add manifestfiles/config_map.yml
+                  git commit -m "Updated config_map.yml with image version"
+                  git push origin main
              '''
             }
             }
