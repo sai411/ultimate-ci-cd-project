@@ -53,7 +53,7 @@ pipeline {
                   git status
                   git add manifestfiles/config_map.yml
                   git commit -m "Updated config_map.yml with image version"
-                  git push origin main
+                  git push origin HEAD:main
              '''
             }
             }
