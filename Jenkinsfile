@@ -45,7 +45,7 @@ pipeline {
             steps{
              sh "echo ${env.BUILD_NUMBER}"
              withCredentials([gitUsernamePassword(credentialsId: '3d567b1b-b8d3-490d-95f2-1a10870cb340', gitToolName: 'Default')]) {
-             sh '''#!/bin/bash -xe
+             sh '''
                   git config user.email "saisatyanarayanagampa@gmail.com"
                   git config user.name "sai411"
                   BUILD_NUMBER=${BUILD_NUMBER}
