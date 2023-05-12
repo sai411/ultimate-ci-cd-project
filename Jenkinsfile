@@ -48,7 +48,6 @@ pipeline {
                   git config user.email "saisatyanarayanagampa@gmail.com"
                   git config user.name "sai411"
                   BUILD_NUMBER=${BUILD_NUMBER}
-                  // sed -i "s/version: \".*\"/version: \"$BUILD_NUMBER\"/" manifestfiles/config_map.yml
                   sed -i "s/version: \"[^\"]*\"/version: \"$BUILD_NUMBER\"/" manifestfiles/config_map.yml
                   git status
                   git add manifestfiles/config_map.yml
