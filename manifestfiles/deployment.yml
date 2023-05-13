@@ -14,13 +14,6 @@ spec:
          spec:
             containers:
                - name: my-app
-                 image: spring-boot-java-app:${version}
+                 image: spring-boot-java-app:1
                  ports:
                   - containerPort: 8080
-                 env:
-                  - name: version
-                    valueFrom:
-                        configMapKeyRef:
-                            name: myapp-cm
-                            key: version
-
