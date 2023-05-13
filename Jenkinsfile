@@ -49,6 +49,7 @@ pipeline {
                   git config user.name "sai411"
                   BUILD_NUMBER_1 = "\"${BUILD_NUMBER}\""
                   echo $BUILD_NUMBER_1
+                  cat manifestfiles/config_map.yml
                   sed -i 's/version: \".*\"/version: \"${BUILD_NUMBER}\"/' manifestfiles/config_map.yml
                   git status
                   git add manifestfiles/config_map.yml
