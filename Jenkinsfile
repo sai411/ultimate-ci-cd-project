@@ -6,6 +6,10 @@ pipeline {
         }
     }
 
+    environment {
+        BUILD_NUMBER_VALUE = '"' + env.BUILD_NUMBER + '"'
+    }
+
     stages {
         stage('git checkout') {
             steps {
@@ -38,7 +42,7 @@ pipeline {
                         git config user.email "saisatyanarayanagampa@gmail.com"
                         git config user.name "sai411"
                         cat manifestfiles/config_map.yml
-                        sed -i "s/version: \".*\"/version: \"${env.BUILD_NUMBER}\"/" manifestfiles/config_map.yml
+                        sed -i "s/version: \".*\"/version: ${BUILD_NUMBER_VALUE}/" manifestfiles/config_map.yml
                         git status
                         git add manifestfiles/config_map.yml
                         git commit -m "Updated config_map.yml with image version"
