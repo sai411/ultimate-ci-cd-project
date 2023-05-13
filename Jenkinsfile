@@ -44,7 +44,6 @@ pipeline {
     environment {
         BUILD_NUMBER_VALUE = '"' + env.BUILD_NUMBER + '"'
     }
-}
     stage('update manifestfile'){
             steps{
              withCredentials([gitUsernamePassword(credentialsId: '3d567b1b-b8d3-490d-95f2-1a10870cb340', gitToolName: 'Default')]) {
