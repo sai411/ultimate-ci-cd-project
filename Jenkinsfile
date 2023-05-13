@@ -2,12 +2,8 @@ pipeline {
     agent {
         docker {
             image 'abhishekf5/maven-abhishek-docker-agent:v1'
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
-    }
-
-    environment {
-        BUILD_NUMBER_VALUE = '"' + env.BUILD_NUMBER + '"'
     }
 
     stages {
@@ -42,8 +38,9 @@ pipeline {
                         git config user.email "saisatyanarayanagampa@gmail.com"
                         git config user.name "sai411"
                         cat manifestfiles/config_map.yml
-                        sed -i "s/version: \".*\"/version: ${BUILD_NUMBER_VALUE}/" manifestfiles/config_map.yml
+                        sed -i "s/version: \".*\"/version: '${env.BUILD_NUMBER}'/" manifestfiles/config_map.yml
                         git status
+                        cat manifestfiles/config_map.yml
                         git add manifestfiles/config_map.yml
                         git commit -m "Updated config_map.yml with image version"
                         git push origin HEAD:main
