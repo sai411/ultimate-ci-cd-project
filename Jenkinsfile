@@ -47,9 +47,9 @@ pipeline {
              sh '''
                   git config user.email "saisatyanarayanagampa@gmail.com"
                   git config user.name "sai411"
-                  def BUILD_NUMBER = "\"${BUILD_NUMBER}\""
-                  println(BUILD_NUMBER)
-                  sed -i "s/version: \".*\"/version: \"${BUILD_NUMBER}\"/" manifestfiles/config_map.yml
+                  BUILD_NUMBER_1 = "\"${BUILD_NUMBER}\""
+                  echo $BUILD_NUMBER_1
+                  sed -i 's/version: \".*\"/version: \"${BUILD_NUMBER}\"/' manifestfiles/config_map.yml
                   git status
                   git add manifestfiles/config_map.yml
                   git commit -m "Updated config_map.yml with image version"
