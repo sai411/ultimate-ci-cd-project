@@ -39,8 +39,8 @@ pipeline {
                         git config user.name "sai411"
                         BUILD_NUMBER=${BUILD_NUMBER}
                         sed -i "s/spring-boot-java-app:.*/spring-boot-java-app:\"${BUILD_NUMBER}\"/" manifestfiles/deployment.yml
-                        git add manifestfiles/config_map.yml
-                        git commit -m "Updated config_map.yml with image version"
+                        git add manifestfiles/deployment.yml
+                        git commit -m "Updated deployment.yml with image version"
                         git push origin HEAD:main
                     '''
                 }
