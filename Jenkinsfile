@@ -48,7 +48,8 @@ pipeline {
                   git config user.email "saisatyanarayanagampa@gmail.com"
                   git config user.name "sai411"
                   cat manifestfiles/config_map.yml
-                  sed -i 's/version: \".*\"/version: \"${env.BUILD_NUMBER}\"/' manifestfiles/config_map.yml
+                  echo "Build number is ${currentBuild.number}"
+                  sed -i 's/version: \".*\"/version: \"${currentBuild.number}\"/' manifestfiles/config_map.yml
                   git status
                   git add manifestfiles/config_map.yml
                   git commit -m "Updated config_map.yml with image version"
