@@ -40,7 +40,7 @@ pipeline {
                         cat manifestfiles/config_map.yml
                         BUILD_NUMBER=${BUILD_NUMBER}
                         echo $BUILD_NUMBER
-                        sed -i "s/version: .*/version: \"${BUILD_NUMBER}\"/" manifestfiles/config_map.yml
+                        sed -i "s/version: .*/version: \\"${BUILD_NUMBER}\\"/" manifestfiles/config_map.yml
                         git status
                         git add manifestfiles/config_map.yml
                         git commit -m "Updated config_map.yml with image version"
