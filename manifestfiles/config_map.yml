@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: myapp-cm
 data:
-  version: 26
+  version: "27"
