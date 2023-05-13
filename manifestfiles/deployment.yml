@@ -14,6 +14,6 @@ spec:
          spec:
             containers:
                - name: my-app
-                 image: sai411/spring-boot-java-app:30
+                 image: sai411/spring-boot-java-app:32
                  ports:
                   - containerPort: 8080
